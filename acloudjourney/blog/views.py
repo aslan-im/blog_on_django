@@ -1,4 +1,15 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
-def home(request):
-    return render(request, 'home.html', {})
+from .models import Post
+# def home(request):
+#     return render(request, 'home.html', {})
+
+class HomeView(ListView):
+    template_name = 'home.html'
+    model = Post
+    ordering = ['-created_at']
+
+class ArticleDetailView(DetailView):
+    template_name = 'post.html'
+    model = Post
