@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.dateformat import format
-
+from django.urls import reverse
 
 class Post(models.Model):
     title = models.CharField(max_length=250)
@@ -13,3 +13,6 @@ class Post(models.Model):
     def __str__(self):
         formatted_date = format(self.created_at, 'N j, Y, P')
         return self.title + ' | ' + str(self.author) + ' | ' + formatted_date
+    
+    def get_absolute_url(self):
+        return reverse('article-detail', args=(str(self.id),))
